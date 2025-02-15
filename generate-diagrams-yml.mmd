@@ -19,7 +19,11 @@ sequenceDiagram
 
     Actions ->>+ Actions: Add generated images to commit
     Actions ->>+ Actions: Configure git user
-    Actions ->>+ Actions: Commit changes with images
-    Actions ->>+ GitHub: Push commit with images
+    alt Changes to commit
+        Actions ->>+ Actions: Commit changes with images
+        Actions ->>+ GitHub: Push commit with images
+    else No changes to commit
+        Actions ->> Actions: No changes to commit
+    end
 
-    GitHub -->> Developer: Commit pushed with images
+    GitHub -->> Developer: Commit pushed with images (if any)
