@@ -1,0 +1,15 @@
+{
+  "name": "diagram-porno",
+  "version": "1.0.0",
+  "description": "Welcome to the diagram dumpster fire! This is where I go wild with MMD and PUML files. Expect a wild ride of randomness, confusion, and maybe some accidental brilliance.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^11.4.2"
+  }
+}
