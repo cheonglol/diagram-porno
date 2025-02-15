@@ -1,0 +1,25 @@
+sequenceDiagram
+    autonumber
+    participant Developer as Developer
+    participant GitHub as GitHub
+    participant Actions as GitHub Actions
+    participant Node as Node.js
+    participant Mermaid as Mermaid CLI
+
+    Developer ->>+ GitHub: Push changes
+    GitHub ->>+ Actions: Trigger workflow
+
+    Actions ->>+ Actions: Checkout repository
+    Actions ->>+ Node: Set up Node.js
+    Node -->> Actions: Node.js set up
+
+    Actions ->>+ Actions: Install dependencies
+    Actions ->>+ Mermaid: Generate diagrams
+    Mermaid -->> Actions: Diagrams generated
+
+    Actions ->>+ Actions: Add generated images to commit
+    Actions ->>+ Actions: Configure git user
+    Actions ->>+ Actions: Commit changes with images
+    Actions ->>+ GitHub: Push commit with images
+
+    GitHub -->> Developer: Commit pushed with images
