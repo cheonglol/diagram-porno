@@ -24,7 +24,7 @@ jobs:
 
       - name: Generate diagrams
         run: |
-          for file in $(git diff --name-only HEAD^ HEAD | grep -E '\.mmd$|\.mermaid$'); do
+          for file in $(git diff --name-only HEAD~1 HEAD | grep -E '\.mmd$|\.mermaid$'); do
             npx mmdc -i $file -o ${file%.*}.png
             git add ${file%.*}.png
           done
@@ -33,7 +33,11 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git commit -m "Auto-generated diagrams" -m "$(for file in $(git diff --name-only HEAD^ HEAD | grep -E '\.png$'); do echo "![Diagram]($file)"; done)"
-          git push
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto-generated diagrams" -m "$(for file in $(git diff --cached --name-only | grep -E '\.png$'); do echo "![Diagram]($file)"; done)"
+            git push
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
